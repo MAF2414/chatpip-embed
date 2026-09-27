@@ -43,8 +43,12 @@
     if (controls) report({ muted: controls.muted(), playing: controls.playing() });
   }
 
+  // Checked by origin, not by sending window: the ChatPiP extension drives the
+  // window from its content script, which runs in the tab that opened it, so
+  // its messages come from that tab rather than from this page's parent. Only
+  // windows of the parent's own origin can reach this page this way.
   window.addEventListener("message", event => {
-    if (!trusted || !controls || event.source !== window.parent || event.origin !== parentOrigin) return;
+    if (!trusted || !controls || event.origin !== parentOrigin) return;
     const command = event.data && event.data.chatpip === 1 ? event.data.command : "";
     if (command === "mute") controls.mute(true);
     else if (command === "unmute") controls.mute(false);

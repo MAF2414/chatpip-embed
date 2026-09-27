@@ -9,8 +9,8 @@ additional streams with the platforms' official embedded players:
 
 ## Messages
 
-Only a window whose origin is `https://www.twitch.tv` or `https://www.youtube.com` and that is this
-page's direct parent can steer the player:
+Only a window of the same origin as this page's parent, which must be `https://www.twitch.tv` or
+`https://www.youtube.com`, can steer the player:
 
 - to the page: `{ chatpip: 1, command: "mute" | "unmute" | "play" | "pause" }`
 - from the page: `{ chatpip: 1, state: { ready, playing, muted, error } }`, where `error` is `""`,
