@@ -71,7 +71,9 @@
         channel,
         height: "100%",
         muted: true,
-        parent: [location.hostname],
+        // Twitch checks every page above the player, so the ChatPiP window that
+        // frames this page is named along with this page itself.
+        parent: trusted ? [location.hostname, new URL(parentOrigin).hostname] : [location.hostname],
         width: "100%"
       });
       controls = {
